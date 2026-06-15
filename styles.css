@@ -1,0 +1,227 @@
+/* ─── PST Engine — Custom Styles ─────────────────────────────────────────────
+   Supplements Tailwind with custom components and scrollbar styling.
+   Design tokens are set in Tailwind config in index.html.
+──────────────────────────────────────────────────────────────────────────── */
+
+/* ─── Custom Scrollbar ───────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #1E2A40; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #2A3A50; }
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #080B12;
+  color: #D4DDE8;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Example Chips ──────────────────────────────────────────────────────── */
+.example-chip {
+  font-size: 0.75rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid #1E2A40;
+  color: #8899AA;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.example-chip:hover {
+  border-color: rgba(0, 229, 160, 0.35);
+  color: #00E5A0;
+  background: rgba(0, 229, 160, 0.05);
+}
+
+/* ─── Chat Messages ──────────────────────────────────────────────────────── */
+.msg-user {
+  display: flex;
+  justify-content: flex-end;
+  animation: fadeUp 0.25s ease forwards;
+}
+.msg-user .bubble {
+  background: rgba(0, 229, 160, 0.08);
+  border: 1px solid rgba(0, 229, 160, 0.2);
+  color: #D4DDE8;
+  border-radius: 1rem 1rem 0.25rem 1rem;
+  padding: 0.75rem 1rem;
+  max-width: min(85%, 520px);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.msg-ai {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  animation: fadeUp 0.25s ease forwards;
+}
+.msg-ai .avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 229, 160, 0.1);
+  border: 1px solid rgba(0, 229, 160, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.msg-ai .bubble {
+  background: #0E1320;
+  border: 1px solid #1E2A40;
+  color: #D4DDE8;
+  border-radius: 1rem 1rem 1rem 0.25rem;
+  padding: 0.75rem 1rem;
+  max-width: min(85%, 520px);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  word-break: break-word;
+}
+.msg-ai .bubble p { margin: 0 0 0.5rem 0; }
+.msg-ai .bubble p:last-child { margin-bottom: 0; }
+
+/* ─── Typing Indicator ───────────────────────────────────────────────────── */
+@keyframes pulseDot {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40%           { transform: scale(1);   opacity: 1; }
+}
+.animate-pulse-dot { animation: pulseDot 1.4s ease-in-out infinite; }
+
+/* ─── PST Result Card (inline in chat) ──────────────────────────────────── */
+.pst-result-card {
+  background: #0E1320;
+  border: 1px solid #1E2A40;
+  border-radius: 1rem;
+  overflow: hidden;
+  max-width: min(92vw, 560px);
+  animation: fadeUp 0.3s ease forwards;
+}
+.pst-result-card:hover { border-color: rgba(0, 229, 160, 0.2); transition: border-color 0.2s ease; }
+
+.pst-result-header {
+  padding: 1rem;
+  border-bottom: 1px solid #1E2A40;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.pst-result-body { padding: 1rem; }
+
+/* PSF Score ring */
+.psf-ring {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+
+/* Variable bars */
+.var-bar-track {
+  height: 4px;
+  background: #1E2A40;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.var-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+
+/* Stability badge colors */
+.badge-CRITICAL    { background: rgba(255,68,68,0.15);  color: #FF4444; border: 1px solid rgba(255,68,68,0.3); }
+.badge-WEAK        { background: rgba(255,140,0,0.15);  color: #FF8C00; border: 1px solid rgba(255,140,0,0.3); }
+.badge-MODERATE    { background: rgba(245,197,24,0.15); color: #F5C518; border: 1px solid rgba(245,197,24,0.3); }
+.badge-STRONG      { background: rgba(76,175,80,0.15);  color: #4CAF50; border: 1px solid rgba(76,175,80,0.3); }
+.badge-EXCEPTIONAL { background: rgba(0,229,160,0.15);  color: #00E5A0; border: 1px solid rgba(0,229,160,0.3); }
+
+/* Positive variable accent */
+.var-positive .var-bar-fill { background: #00E5A0; }
+.var-positive .var-label    { color: #00E5A0; }
+
+/* Negative variable accent */
+.var-negative .var-bar-fill { background: #FF4444; }
+.var-negative .var-label    { color: #FF4444; }
+
+/* ─── Recommendation Items ───────────────────────────────────────────────── */
+.rec-item {
+  display: flex;
+  gap: 0.625rem;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid #1E2A40;
+}
+.rec-item:last-child { border-bottom: none; }
+
+.rec-priority-HIGH   { color: #FF4444; }
+.rec-priority-MEDIUM { color: #FF8C00; }
+.rec-priority-LOW    { color: #8899AA; }
+
+/* ─── Keyframes ──────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Textarea ───────────────────────────────────────────────────────────── */
+textarea { scrollbar-width: thin; scrollbar-color: #1E2A40 transparent; }
+
+/* ─── Focus states ───────────────────────────────────────────────────────── */
+button:focus-visible, textarea:focus-visible {
+  outline: 2px solid rgba(0, 229, 160, 0.5);
+  outline-offset: 2px;
+}
+
+/* ─── Reduced Motion ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ─── Mobile Tweaks ──────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .pst-result-header { flex-direction: column; }
+  .psf-ring { width: 52px; height: 52px; }
+}
+
+/* ─── View Full Report button ────────────────────────────────────────────── */
+.view-report-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  color: #00E5A0;
+  background: rgba(0, 229, 160, 0.05);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+.view-report-btn:hover {
+  background: rgba(0, 229, 160, 0.12);
+  border-color: rgba(0, 229, 160, 0.4);
+}
+
+/* ─── Error Message ──────────────────────────────────────────────────────── */
+.msg-error .bubble {
+  background: rgba(255,68,68,0.06);
+  border-color: rgba(255,68,68,0.2);
+  color: #FF8888;
+}
+
+/* ─── Modal scroll fix ───────────────────────────────────────────────────── */
+#result-modal { overflow-y: auto; }
